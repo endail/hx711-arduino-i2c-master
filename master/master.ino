@@ -51,7 +51,7 @@ void loop() {
          static_cast<uint16_t>(arr[1]);
 
     //hx711 reading
-    int32_t rd = 
+    const int32_t rd = 
         (static_cast<int32_t>(     0) << 24) |
         (static_cast<int32_t>(arr[2]) << 16) |
         (static_cast<int32_t>(arr[3]) << 8)  |
