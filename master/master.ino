@@ -40,7 +40,7 @@ void loop() {
     uint8_t arr[I2C_SLAVE_BYTES]{0};
 
     for(uint8_t* ptr = arr; ptr < arr + I2C_SLAVE_BYTES; ++ptr) {
-        *ptr = (uint8_t)Wire.read();
+        *ptr = static_cast<uint8_t>(Wire.read());
     }
 
     //reconstruct the data
