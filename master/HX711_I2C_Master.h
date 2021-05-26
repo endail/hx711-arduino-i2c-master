@@ -30,8 +30,6 @@ class HX711_I2C_Master {
 
 protected:
     static const uint8_t _I2C_BYTES = 5;
-    static constexpr int32_t _MIN_READING = -(2 ^ (24 - 1));
-    static constexpr int32_t _MAX_READING = (2 ^ 24) - 1;
     const int8_t _addr;
 
 public:
@@ -95,18 +93,33 @@ public:
     };
 
     struct I2C_Response {
-        public:
-
-            uint16_t diff;
-            int32_t reading;
+        protected:
+            static constexpr int32_t _MIN_READING = -(2 ^ (24 - 1));
+            static constexpr int32_t _MAX_READING = (2 ^ 24) - 1;
+            uint16_t _diff;
+            int32_t _reading;
         
+        public:
+            I2C_Response(const uint16_t diff, const int32_t)
+                :   _diff(diff),
+                    _reading(reading) {
+            }
+
+            uint16_t getDiff() const {
+                return this->_diff;
+            }
+
+            int32_t getReading() const {
+                return this->_reading;
+            }
+
             bool isValidReading() const noexcept {
-                return this->reading >= _MIN_READING &&
-                    this->reading <= _MAX_READING;
+                return this->_reading >= _MIN_READING &&
+                    this->_reading <= _MAX_READING;
             }
 
             bool isMaxDiff() const noexcept {
-                return this->diff == UINT16_MAX;
+                return this->_diff == UINT16_MAX;
             }
 
     };
