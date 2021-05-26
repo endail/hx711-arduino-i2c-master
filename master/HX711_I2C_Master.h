@@ -106,7 +106,7 @@ public:
             }
 
             bool isMaxDiff() const noexcept {
-                return this->diff = UINT16_MAX;
+                return this->diff == UINT16_MAX;
             }
 
     };
